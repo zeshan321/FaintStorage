@@ -1,0 +1,63 @@
+# AIR must always be here!
+AllowedItems:
+  - AIR
+  - ENCHANTED_BOOK
+  - KNOWLEDGE_BOOK
+  - WRITTEN_BOOK
+  - BOOK
+  - BOOK_AND_QUILL
+
+# Bookshelf item. Display name must be unique!
+Bookshelf:
+  Material: BOOKSHELF
+  ByteData: -1
+  Display: "&cSpecial bookshelf"
+  Lore:
+    - "&cA special bookshelf"
+  Glow: true
+  Enchantments: []
+  Levels: []
+
+# Must be in order of ranking. Title can be the same but must be unique for other plugins!
+Upgrades:
+  # 0 is default when bookshelf is placed.
+  '0':
+    Cost: 0
+    Size: 9
+    Title: "&bDefault bookshelf"
+    IconLocked: BOOK_AND_QUILL
+    IconUnlocked: BOOK
+    Position: 1
+  '1':
+    Cost: 1500
+    Size: 18
+    Title: "&bLevel 1 bookshelf"
+    IconLocked: BOOK_AND_QUILL
+    IconUnlocked: BOOK
+    Position: 2
+  '2':
+    Cost: 2500
+    Size: 27
+    Title: "&bLevel 2 bookshelf"
+    IconLocked: BOOK_AND_QUILL
+    IconUnlocked: BOOK
+    Position: 3
+
+UpgradesInventory:
+  Size: 9
+  Title: "&bUpgrades Inventory"
+
+UpgradesItem:
+  Display: "&bClick to unlock %title%"
+  Lore:
+    - "&aClick to unlock %title%"
+    - "&aCost %cost%"
+    - "&aSize %size%"
+
+Messages:
+  NotYourBookShelf: "&bYou do not have access!"
+  PlacedBookshelf: "&bPlaced bookshelf!"
+  NotAllowed: "&bItem not allowed!"
+  AlreadyUnlocked: "&cUpgrade already unlocked!"
+  NotEnoughMoney: "&bYou do not have enough money!"
+  UnlockedUpgrade: "&bYou unlocked an upgrade!"

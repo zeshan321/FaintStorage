@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="FaintStorage:jar">
+    <output-path>$PROJECT_DIR$/../../MC/1.12/plugins</output-path>
+    <root id="archive" name="FaintStorage.jar">
+      <element id="module-output" name="FaintStorage" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/expiringmap-0.5.9.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/minecraft-timings-1.0.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/Table-1.0.0-20180331.054128-7.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/locales-1.0-20181221.115311-17.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/acf-core-0.5.0-20190605.163502-145.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/acf-paper-0.5.0-20190605.163511-145.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/acf-bukkit-0.5.0-20190605.163507-150.jar" path-in-jar="/" />
+      <element id="file-copy" path="$PROJECT_DIR$/config.yml" />
+      <element id="file-copy" path="$PROJECT_DIR$/plugin.yml" />
+    </root>
+  </artifact>
+</component>
