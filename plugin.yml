@@ -1,4 +1,4 @@
 name: FaintStorage
 main: com.zeshanaslam.faintstorage.Main
-version: 1.0.2
+version: 1.0.4
 softdepend: [ASkyBlock, FabledSkyBlock, Vault]

@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1a094cfc-45d8-4748-b63e-f9be6eee2432" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zeshanaslam/faintstorage/config/ConfigStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/zeshanaslam/faintstorage/config/ConfigStore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zeshanaslam/faintstorage/hooks/ASkyBlockHook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/zeshanaslam/faintstorage/hooks/ASkyBlockHook.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zeshanaslam/faintstorage/hooks/FabledSkyBlockHook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/zeshanaslam/faintstorage/hooks/FabledSkyBlockHook.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zeshanaslam/faintstorage/hooks/HookHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/zeshanaslam/faintstorage/hooks/HookHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/plugin.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/zeshanaslam/faintstorage/listeners/StorageItemEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/zeshanaslam/faintstorage/listeners/StorageItemEvents.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -34,20 +29,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="486">
+            <state relative-caret-position="492">
               <caret line="63" column="14" selection-start-line="63" selection-start-column="2" selection-end-line="63" selection-end-column="14" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/zeshanaslam/faintstorage/config/ConfigStore.java">
+        <entry file="file://$PROJECT_DIR$/plugin.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="333">
-              <caret line="48" column="20" selection-start-line="48" selection-start-column="20" selection-end-line="48" selection-end-column="20" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="34">
+              <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -67,8 +59,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/zeshanaslam/faintstorage/listeners/StorageItemEvents.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="209" column="100" selection-start-line="209" selection-start-column="85" selection-end-line="209" selection-end-column="100" />
+            <state relative-caret-position="265">
+              <caret line="165" selection-start-line="165" selection-end-line="165" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -168,12 +160,12 @@
         <option value="$PROJECT_DIR$/src/com/zeshanaslam/faintstorage/config/Upgrade.java" />
         <option value="$PROJECT_DIR$/src/com/zeshanaslam/faintstorage/utils/UpgradeInvHelpers.java" />
         <option value="$PROJECT_DIR$/src/com/zeshanaslam/faintstorage/Main.java" />
-        <option value="$PROJECT_DIR$/plugin.yml" />
         <option value="$PROJECT_DIR$/config.yml" />
         <option value="$PROJECT_DIR$/src/com/zeshanaslam/faintstorage/config/ConfigStore.java" />
         <option value="$PROJECT_DIR$/src/com/zeshanaslam/faintstorage/hooks/ASkyBlockHook.java" />
         <option value="$PROJECT_DIR$/src/com/zeshanaslam/faintstorage/hooks/FabledSkyBlockHook.java" />
         <option value="$PROJECT_DIR$/src/com/zeshanaslam/faintstorage/hooks/HookHandler.java" />
+        <option value="$PROJECT_DIR$/plugin.yml" />
         <option value="$PROJECT_DIR$/src/com/zeshanaslam/faintstorage/listeners/StorageItemEvents.java" />
       </list>
     </option>
@@ -356,12 +348,12 @@
       <option name="presentableId" value="Default" />
       <updated>1560399442804</updated>
       <workItem from="1560399445278" duration="22099000" />
-      <workItem from="1560569497506" duration="2774000" />
+      <workItem from="1560569497506" duration="3908000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24873000" />
+    <option name="totallyTimeSpent" value="26007000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -400,6 +392,18 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/zeshanaslam/faintstorage/listeners/StorageItemEvents.java</url>
+          <line>211</line>
+          <properties />
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/com/zeshanaslam/faintstorage/utils/EnchantGlow.java">
@@ -487,13 +491,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/plugin.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="46" selection-start-line="3" selection-start-column="46" selection-end-line="3" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/zeshanaslam/faintstorage/config/storage/StorageDataHelpers.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -511,13 +508,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="63" column="14" selection-start-line="63" selection-start-column="2" selection-end-line="63" selection-end-column="14" />
         </state>
       </provider>
     </entry>
@@ -592,10 +582,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="492">
+          <caret line="63" column="14" selection-start-line="63" selection-start-column="2" selection-end-line="63" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugin.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/zeshanaslam/faintstorage/listeners/StorageItemEvents.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="209" column="100" selection-start-line="209" selection-start-column="85" selection-end-line="209" selection-end-column="100" />
+        <state relative-caret-position="265">
+          <caret line="165" selection-start-line="165" selection-end-line="165" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

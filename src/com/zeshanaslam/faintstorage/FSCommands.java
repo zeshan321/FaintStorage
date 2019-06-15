@@ -23,6 +23,13 @@ public class FSCommands extends BaseCommand {
         help.showHelp();
     }
 
+    @Subcommand("ver")
+    @CommandPermission("faintstorage.ver")
+    @Description("Gets ver")
+    public void onVer(CommandSender sender) {
+        sender.sendMessage(ChatColor.GREEN + plugin.getDescription().getVersion());
+    }
+
     @Subcommand("reload")
     @CommandPermission("faintstorage.reload")
     @Description("Reloads config")

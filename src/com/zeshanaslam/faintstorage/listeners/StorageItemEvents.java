@@ -161,9 +161,9 @@ public class StorageItemEvents implements Listener {
             return;
         }
         if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-            event.setCancelled(true);
-
             if (!player.isSneaking()) {
+                event.setCancelled(true);
+
                 Inventory inventory = Bukkit.createInventory(player, upgrade.size, upgrade.title);
                 if (storageData.contents != null) {
                     inventory.setContents(storageData.contents);
@@ -174,6 +174,8 @@ public class StorageItemEvents implements Listener {
             }
         } else {
             if (!player.isSneaking()) {
+                event.setCancelled(true);
+
                 upgradeInvHelpers.openInventory(player, upgrade);
                 open.put(player.getUniqueId(), storageData.safeLocation);
             }
