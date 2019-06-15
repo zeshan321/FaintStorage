@@ -9,25 +9,23 @@ import com.zeshanaslam.faintstorage.utils.StorageHelpers;
 import com.zeshanaslam.faintstorage.utils.UpgradeInvHelpers;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockExplodeEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
-import org.bukkit.event.inventory.InventoryInteractEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
 
 public class StorageItemEvents implements Listener {
@@ -60,6 +58,39 @@ public class StorageItemEvents implements Listener {
     }
 
     @EventHandler
+    public void onBreak(BlockBreakEvent event) {
+        if (event.isCancelled())
+            return;
+
+        Block block = event.getBlock();
+        Location blockLocation = block.getLocation();
+        SafeLocation safeLocation = new SafeLocation().fromLocation(blockLocation);
+        if (!main.configStore.storageStore.storageData.containsKey(safeLocation))
+            return;
+
+        StorageData storageData = main.configStore.storageStore.storageData.get(safeLocation);
+        main.configStore.storageStore.storageData.remove(safeLocation);
+        main.configStore.storageStore.storageDataHelpers.delete(storageData);
+    }
+
+    @EventHandler
+    public void onExplode(EntityExplodeEvent event) {
+        if (event.isCancelled())
+            return;
+
+        for (Block block: event.blockList()) {
+            Location blockLocation = block.getLocation();
+            SafeLocation safeLocation = new SafeLocation().fromLocation(blockLocation);
+            if (!main.configStore.storageStore.storageData.containsKey(safeLocation))
+                return;
+
+            StorageData storageData = main.configStore.storageStore.storageData.get(safeLocation);
+            main.configStore.storageStore.storageData.remove(safeLocation);
+            main.configStore.storageStore.storageDataHelpers.delete(storageData);
+        }
+    }
+
+    @EventHandler
     public void onClick(PlayerInteractEvent event) {
         if (event.isCancelled())
             return;
@@ -80,10 +111,9 @@ public class StorageItemEvents implements Listener {
             player.sendMessage(main.configStore.messages.get(ConfigStore.Messages.NotYourBookShelf));
             return;
         }
-
-        event.setCancelled(true);
-
         if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+            event.setCancelled(true);
+
             Inventory inventory = Bukkit.createInventory(player, upgrade.size, upgrade.title);
             if (storageData.contents != null) {
                 inventory.setContents(storageData.contents);
