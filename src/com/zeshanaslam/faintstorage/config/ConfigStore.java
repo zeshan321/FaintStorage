@@ -45,7 +45,8 @@ public class ConfigStore {
         NotAllowed,
         AlreadyUnlocked,
         NotEnoughMoney,
-        UnlockedUpgrade
+        UnlockedUpgrade,
+        CannotUnlock
     }
 
     public void save() {

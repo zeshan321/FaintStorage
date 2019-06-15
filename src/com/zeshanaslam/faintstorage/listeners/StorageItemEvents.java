@@ -9,15 +9,14 @@ import com.zeshanaslam.faintstorage.utils.StorageHelpers;
 import com.zeshanaslam.faintstorage.utils.UpgradeInvHelpers;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockExplodeEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.block.*;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
@@ -71,6 +70,10 @@ public class StorageItemEvents implements Listener {
         StorageData storageData = main.configStore.storageStore.storageData.get(safeLocation);
         main.configStore.storageStore.storageData.remove(safeLocation);
         main.configStore.storageStore.storageDataHelpers.delete(storageData);
+
+        event.setCancelled(true);
+        block.setType(Material.AIR);
+        blockLocation.getWorld().dropItemNaturally(blockLocation, main.configStore.storageItem.getItem());
     }
 
     @EventHandler
@@ -91,6 +94,52 @@ public class StorageItemEvents implements Listener {
     }
 
     @EventHandler
+    public void onChange(BlockFromToEvent event) {
+        if (event.isCancelled())
+            return;
+
+        Block block = event.getBlock();
+        Location blockLocation = block.getLocation();
+        SafeLocation safeLocation = new SafeLocation().fromLocation(blockLocation);
+        if (!main.configStore.storageStore.storageData.containsKey(safeLocation))
+            return;
+
+        event.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onPiston(BlockPistonExtendEvent event) {
+        if (event.isCancelled())
+            return;
+
+        for (Block block: event.getBlocks()) {
+            Location blockLocation = block.getLocation();
+            SafeLocation safeLocation = new SafeLocation().fromLocation(blockLocation);
+            if (!main.configStore.storageStore.storageData.containsKey(safeLocation))
+                return;
+
+            event.setCancelled(true);
+            return;
+        }
+    }
+
+    @EventHandler
+    public void onPiston(BlockPistonRetractEvent event) {
+        if (event.isCancelled())
+            return;
+
+        for (Block block: event.getBlocks()) {
+            Location blockLocation = block.getLocation();
+            SafeLocation safeLocation = new SafeLocation().fromLocation(blockLocation);
+            if (!main.configStore.storageStore.storageData.containsKey(safeLocation))
+                return;
+
+            event.setCancelled(true);
+            return;
+        }
+    }
+
+    @EventHandler
     public void onClick(PlayerInteractEvent event) {
         if (event.isCancelled())
             return;
@@ -107,24 +156,28 @@ public class StorageItemEvents implements Listener {
 
         StorageData storageData = main.configStore.storageStore.storageData.get(safeLocation);
         Upgrade upgrade = main.configStore.upgrades.get(storageData.rank);
-        if (!main.hookHandler.getOwner(blockLocation).equals(player.getUniqueId())) {
+        if (!main.hookHandler.isOwnerOrMember(blockLocation, player)) {
             player.sendMessage(main.configStore.messages.get(ConfigStore.Messages.NotYourBookShelf));
             return;
         }
         if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
             event.setCancelled(true);
 
-            Inventory inventory = Bukkit.createInventory(player, upgrade.size, upgrade.title);
-            if (storageData.contents != null) {
-                inventory.setContents(storageData.contents);
+            if (!player.isSneaking()) {
+                Inventory inventory = Bukkit.createInventory(player, upgrade.size, upgrade.title);
+                if (storageData.contents != null) {
+                    inventory.setContents(storageData.contents);
+                }
+
+                player.openInventory(inventory);
+                open.put(player.getUniqueId(), storageData.safeLocation);
             }
-
-            player.openInventory(inventory);
         } else {
-            upgradeInvHelpers.openInventory(player, upgrade);
+            if (!player.isSneaking()) {
+                upgradeInvHelpers.openInventory(player, upgrade);
+                open.put(player.getUniqueId(), storageData.safeLocation);
+            }
         }
-
-        open.put(player.getUniqueId(), storageData.safeLocation);
     }
 
     @EventHandler
@@ -139,22 +192,35 @@ public class StorageItemEvents implements Listener {
 
     @EventHandler
     public void onClick(InventoryClickEvent event) {
-        if (event.getView().getTopInventory() == null  || event.getView().getTopInventory().getTitle() == null || (!(event.getWhoClicked() instanceof Player))) {
-            return;
-        }
-
         Player player = (Player) event.getWhoClicked();
         if (!open.containsKey(player.getUniqueId()))
             return;
 
-        if (event.getCurrentItem() == null)
-            return;
-
-        if (!main.configStore.allowedItems.contains(event.getCurrentItem().getType())) {
+        if (event.getCursor() != null && !main.configStore.allowedItems.contains(event.getCursor().getType())) {
             player.sendMessage(main.configStore.messages.get(ConfigStore.Messages.NotAllowed));
             event.setCancelled(true);
+        }
+
+        if (event.getCurrentItem() != null && !main.configStore.allowedItems.contains(event.getCurrentItem().getType())) {
+            player.sendMessage(main.configStore.messages.get(ConfigStore.Messages.NotAllowed));
+            event.setCancelled(true);
+        }
+
+        if (event.getAction() == InventoryAction.HOTBAR_SWAP || event.getAction() == InventoryAction.HOTBAR_MOVE_AND_READD) {
+            ItemStack itemStack = event.getView().getBottomInventory().getItem(event.getHotbarButton());
+
+            if (itemStack != null && !main.configStore.allowedItems.contains(itemStack.getType())) {
+                player.sendMessage(main.configStore.messages.get(ConfigStore.Messages.NotAllowed));
+                event.setCancelled(true);
+            };
+        }
+
+        if (event.getView().getTopInventory() == null  || event.getView().getTopInventory().getTitle() == null) {
             return;
         }
+
+        if (event.isCancelled())
+            return;
 
         SafeLocation safeLocation = open.get(player.getUniqueId());
         StorageData storageData = main.configStore.storageStore.storageData.get(safeLocation);
@@ -232,12 +298,17 @@ public class StorageItemEvents implements Listener {
             return;
         }
 
+        if (storageData.rank + 1 != upgrade.rank) {
+            player.sendMessage(main.configStore.messages.get(ConfigStore.Messages.CannotUnlock));
+            return;
+        }
+
         // Update rank
         storageData.rank = upgrade.rank;
         main.configStore.storageStore.storageData.put(safeLocation, storageData);
 
         player.closeInventory();
-        upgradeInvHelpers.openInventory(player, upgrade);
+        //upgradeInvHelpers.openInventory(player, upgrade);
         player.sendMessage(main.configStore.messages.get(ConfigStore.Messages.UnlockedUpgrade));
     }
 }

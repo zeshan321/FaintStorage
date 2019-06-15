@@ -3,6 +3,7 @@ package com.zeshanaslam.faintstorage.hooks;
 import com.zeshanaslam.faintstorage.Main;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
@@ -35,6 +36,18 @@ public class HookHandler {
         }
 
         return null;
+    }
+
+    public boolean isOwnerOrMember(Location location, Player player) {
+        if (hookedASkyBlock) {
+            return new ASkyBlockHook().isMember(location, player);
+        }
+
+        if (hookedFabledSkyBlock) {
+            return new FabledSkyBlockHook().isMember(location, player);
+        }
+
+        return false;
     }
 
     private void setupASkyBlock() {

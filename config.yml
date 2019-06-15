@@ -61,3 +61,4 @@ Messages:
   AlreadyUnlocked: "&cUpgrade already unlocked!"
   NotEnoughMoney: "&bYou do not have enough money!"
   UnlockedUpgrade: "&bYou unlocked an upgrade!"
+  CannotUnlock: "&bYou must unlock the previous levels!"
